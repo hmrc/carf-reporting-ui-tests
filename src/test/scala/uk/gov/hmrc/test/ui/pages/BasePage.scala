@@ -48,7 +48,7 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
     .ignoring(classOf[org.openqa.selenium.StaleElementReferenceException])
     .ignoring(classOf[org.openqa.selenium.NoSuchElementException])
 
-  def onPage(pageUrl: String = this.pageUrl, timeoutSeconds: Long = 3): Unit =
+  def onPage(timeoutSeconds: Long = 3): Unit =
     fluentWait(timeoutSeconds).until(ExpectedConditions.urlToBe(pageUrl))
 
   def clickOnLink(link: By): Unit = {
@@ -68,8 +68,8 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
     click(continueButtonId)
   }
 
-  def select(option: String, pageUrl: String = this.pageUrl): Unit = {
-    onPage(pageUrl)
+  def select(option: String, pageUrl: String): Unit = {
+    onPage()
 
     val radioId = option.trim.toLowerCase match {
       case "yes" => yesRadioId
@@ -101,14 +101,12 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
     click(submitButtonId)
   }
 
-  def uploadAnyFile(file: String): this.type = {
+  def uploadAnyFile(file: String): Unit =
     if (file.nonEmpty) {
       val filePath      = s"${System.getProperty("user.dir")}/src/test/resources/files/$file"
       fluentWait().until(ExpectedConditions.presenceOfElementLocated(fileUploadId))
       val uploadElement = driver.findElement(fileUploadId)
       uploadElement.sendKeys(filePath)
     }
-    this
-  }
 
 }

@@ -31,10 +31,9 @@ object AuthLoginPage extends BasePage {
   private val identifierValueField: By = By.id("input-0-0-value")
   private val authSubmitById: By       = By.id("submit-top")
 
-  private def authLoginPage: this.type = {
+  private def authLoginPage: Unit = {
     navigateTo(pageUrl)
     onPage()
-    this
   }
 
   private def selectAffinityGroup(affinityGroup: String): Unit =
@@ -58,8 +57,6 @@ object AuthLoginPage extends BasePage {
     additionalFormFields
     submitAuthPage()
 
-  def loginAsOrgAdminWithoutCtUtr(carfId: String): ReportingHomePage.type = {
+  def loginAsOrgAdminWithoutCtUtr(carfId: String): Unit =
     submitAuth("Organisation", "User")(addCarfId(carfId))
-    ReportingHomePage
-  }
 }

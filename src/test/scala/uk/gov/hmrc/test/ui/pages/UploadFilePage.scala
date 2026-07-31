@@ -18,12 +18,11 @@ package uk.gov.hmrc.test.ui.pages
 
 object UploadFilePage extends BasePage {
 
-  override val pageUrl: String = baseUrl + "/report/upload-file"
+  override val pageUrl: String = baseUrl + "/send-a-cryptoasset-report/upload-file"
 
-  def fileUpload(file: String): this.type = {
+  def fileUpload(file: String): Unit = {
     uploadAnyFile(file)
     click(submitButtonId)
-    this
   }
 
 }

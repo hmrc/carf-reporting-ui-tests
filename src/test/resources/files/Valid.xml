@@ -1,11 +1,10 @@
-1. Window contras
-2. "Can we complete the schmea check" diamond it goes -> if answer is NO, when would that happen and how can we simulate?
+1. Window contrast
+2. "Can we complete the schema check" diamond it goes -> if answer is NO, when would that happen and how can we simulate?
 3. What is the error page at the end of journey, /problem/rules-errors or what is the difference between /report/problem/data-errors and /problem/rules-errors
 
 
-"Can we complete the schmea check" - in which scenario we can not complete the schema check? and how can we simulate for testing? 
+"Can we complete the schema check" - in which scenario we can not complete the schema check? and how can we simulate for testing?
 
-What is the difference between - /problem/rules-errors and /report/problem/data-errors ? 
+What is the difference between - /problem/rules-errors and /report/problem/data-errors ?
 
-Is it ok if we tests Windows high contrast alternative in MacOS? 
-
+Is it ok if we test Windows high contrast alternatives in MacOS?
