@@ -1,10 +1,8 @@
-**This is the template README. Please update this with project specific content.**
-
 # carf-reporting-ui-tests
-
 `carf-reporting-frontend` UI journey tests.
 
 ## Pre-requisites
+The relevant microservices should be up and running for the registration ui journey tests
 
 ### Services
 
