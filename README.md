@@ -2,7 +2,7 @@
 `carf-reporting-frontend` UI journey tests.
 
 ## Pre-requisites
-The relevant microservices should be up and running for the registration ui journey tests
+The relevant microservices should be up and running for the reporting ui journey tests
 
 ### Services
 
