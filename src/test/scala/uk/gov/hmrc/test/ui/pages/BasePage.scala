@@ -68,7 +68,7 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
     click(continueButtonId)
   }
 
-  def select(option: String, pageUrl: String): Unit = {
+  def select(option: String): Unit = {
     onPage()
 
     val radioId = option.trim.toLowerCase match {
