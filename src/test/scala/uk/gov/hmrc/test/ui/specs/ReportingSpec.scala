@@ -40,7 +40,7 @@ class ReportingSpec extends BaseSpec {
 
       // TODO: Change navigation when redirection from service home page is ready
       And("the Organisation user navigates to '/invalid-xml' page")
-      InvalidXmlPage.navigateInvalidXmlPage
+      InvalidXmlPage.navigateInvalidXmlPage()
 
       And("the Organisation user clicks 'Upload a different file' link on '/invalid-xml' page")
       InvalidXmlPage.clickOnLink(InvalidXmlPage.uploadADifferentFileLink)

@@ -42,7 +42,7 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
   val inputId: By          = By.id("value")
   val fileUploadId: By     = By.id("file-upload-input")
 
-  private def fluentWait(timeoutSeconds: Long = 8): Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
+  private def fluentWait(timeoutSeconds: Long): Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(timeoutSeconds))
     .pollingEvery(Duration.ofMillis(200))
     .ignoring(classOf[org.openqa.selenium.StaleElementReferenceException])
@@ -104,9 +104,8 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
   def uploadAnyFile(file: String): Unit =
     if (file.nonEmpty) {
       val filePath      = s"${System.getProperty("user.dir")}/src/test/resources/files/$file"
-      fluentWait().until(ExpectedConditions.presenceOfElementLocated(fileUploadId))
+      fluentWait(8).until(ExpectedConditions.presenceOfElementLocated(fileUploadId))
       val uploadElement = driver.findElement(fileUploadId)
       uploadElement.sendKeys(filePath)
     }
-
 }
