@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,15 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.selenium.component.PageObject
+object UploadFilePage extends BasePage {
 
-trait BasePage extends PageObject {}
+  override val pageUrl: String = baseUrl + "/upload-file"
+
+  def fileUpload(file: String): Unit = {
+    uploadAnyFile(file)
+    click(submitButtonId)
+  }
+
+}
