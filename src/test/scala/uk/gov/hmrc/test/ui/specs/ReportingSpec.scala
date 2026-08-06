@@ -27,6 +27,9 @@ class ReportingSpec extends BaseSpec {
       Given("the Organisation user logs in with a valid CARF ID")
       AuthLoginPage.loginAsOrgAdminWithoutCtUtr("RG1111")
 
+      And("the Organisation user clicks on 'Upload an XML file' link on '/manage-cryptoasset-reports' page")
+      ServiceHomePage.clickOnLink(ServiceHomePage.uploadXmlFileLink)
+
       And("the Organisation user uploads a valid file on '/upload-file' page")
       UploadFilePage.fileUpload("Valid.xml")
 
