@@ -20,9 +20,8 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 
 object AuthLoginPage extends BasePage {
-  override val pageUrl: String      = TestConfiguration.url("auth-login-stub") + "/gg-sign-in"
-  private val redirectUrl: String   = TestConfiguration.url("carf-reporting-frontend")
-  private val managementUrl: String = "http://localhost:17002/manage-cryptoasset-reports"
+  override val pageUrl: String    = TestConfiguration.url("auth-login-stub") + "/gg-sign-in"
+  private val redirectUrl: String = TestConfiguration.url("carf-management-frontend") + "/manage-cryptoasset-reports"
 
   private val redirectionUrlById: By   = By.id("redirectionUrl")
   private val affinityGroupById: By    = By.id("affinityGroupSelect")
@@ -52,7 +51,7 @@ object AuthLoginPage extends BasePage {
 
   private def submitAuth(affinityGroup: String, credentialRole: String)(additionalFormFields: => Unit = ()): Unit =
     authLoginPage()
-    sendKeys(redirectionUrlById, managementUrl)
+    sendKeys(redirectionUrlById, redirectUrl)
     selectAffinityGroup(affinityGroup)
     selectCredentialRole(credentialRole)
     additionalFormFields

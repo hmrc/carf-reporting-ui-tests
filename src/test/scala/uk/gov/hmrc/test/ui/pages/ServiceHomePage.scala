@@ -17,9 +17,10 @@
 package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.test.ui.conf.TestConfiguration
 
 object ServiceHomePage extends BasePage {
-  override val pageUrl: String = "http://localhost:17002/manage-cryptoasset-reports"
+  override val pageUrl: String = TestConfiguration.url("carf-management-frontend") + "/manage-cryptoasset-reports"
 
   val uploadXmlFileLink: By = By.cssSelector("a[href*='/send-a-cryptoasset-report/upload-file']")
 
