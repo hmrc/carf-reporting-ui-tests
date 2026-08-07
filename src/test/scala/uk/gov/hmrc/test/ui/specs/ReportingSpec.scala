@@ -27,6 +27,9 @@ class ReportingSpec extends BaseSpec {
       Given("the Organisation user logs in with a valid CARF ID")
       AuthLoginPage.loginAsOrgAdminWithoutCtUtr("RG1111")
 
+      And("the Organisation user clicks on 'Upload an XML file' link on '/manage-cryptoasset-reports' page")
+      ServiceHomePage.clickOnLink(ServiceHomePage.uploadXmlFileLink)
+
       And("the Organisation user uploads a valid file on '/upload-file' page")
       UploadFilePage.fileUpload("Valid.xml")
 
@@ -38,12 +41,18 @@ class ReportingSpec extends BaseSpec {
       Given("the Organisation user logs in with a valid CARF ID")
       AuthLoginPage.loginAsOrgAdminWithoutCtUtr("RG1111")
 
+      And("the Organisation user clicks on 'Upload an XML file' link on '/manage-cryptoasset-reports' page")
+      ServiceHomePage.clickOnLink(ServiceHomePage.uploadXmlFileLink)
+
       // TODO: Change navigation when redirection from service home page is ready
       And("the Organisation user navigates to '/invalid-xml' page")
       InvalidXmlPage.navigateInvalidXmlPage()
 
       And("the Organisation user clicks 'Upload a different file' link on '/invalid-xml' page")
       InvalidXmlPage.clickOnLink(InvalidXmlPage.uploadADifferentFileLink)
+
+      Then("the Organisation user is redirected to '/upload-file' page")
+      UploadFilePage.onPage()
     }
   }
 }
