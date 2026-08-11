@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CARFMessage>
+    <MessageSpec>
+        <SendingEntityIN>123456789</SendingEntityIN>
+        <TransmittingCountry>GB</TransmittingCountry>
+    </MessageSpecc>
+    <CARFBody>
+        <DocRefId>REF-12345</DocRefId>
+    </CARFBody>
+</CARFMessage>
