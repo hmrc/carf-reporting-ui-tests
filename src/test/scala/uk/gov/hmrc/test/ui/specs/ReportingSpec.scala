@@ -38,7 +38,7 @@ class ReportingSpec extends BaseSpec {
 
       And("the Organisation user click 'Confirm and send' on '/send-your-file' page")
       SendYourFilePage.onPageSubmitById()
-      SendYourFilePage.loadingSpinnerDisappear()
+      SendYourFilePage.loadingSpinnerDisappear(45)
 
       And("the Organisation user click 'Upload another file' link on '/file-confirmation' page")
       FileConfirmationPage.clickOnLinkWithIdPage(FileConfirmationPage.uploadAnotherFileLink)
@@ -47,7 +47,40 @@ class ReportingSpec extends BaseSpec {
       UploadFilePage.onPage()
 
     }
-    Scenario("2 - Organisation user uploads Invalid file", SoloTests) { // TODO: Update tag once scenarios are confirmed
+
+    Scenario("2 - Organisation user uploads Valid file - Slow journey", ReportingTests) {
+
+      Given("the Organisation user logs in with a valid CARF ID")
+      AuthLoginPage.loginAsOrgAdminWithoutCtUtr("RG1121")
+
+      And("the Organisation user clicks on 'Upload an XML file' link on '/manage-cryptoasset-reports' page")
+      ServiceHomePage.clickOnLink(ServiceHomePage.uploadXmlFileLink)
+
+      And("the Organisation user uploads a valid file on '/upload-file' page")
+      UploadFilePage.fileUpload("accepted-slow-valid-carf.xml")
+
+      And("the Organisation user clicks 'Continue' on '/check-your-file-details' page")
+      CheckYourFileDetailsPage.onPageContinueById()
+
+      And("the Organisation user click 'Confirm and send' on '/send-your-file' page")
+      SendYourFilePage.onPageSubmitById()
+      SendYourFilePage.loadingSpinnerDisappear(150)
+
+      And("the Organisation user clicks '/Refresh for updates' button on '/still-checking-your-file' page")
+      StillCheckingYourFilePage.refreshUntilRedirected(150)
+
+      And("the Organisation user click 'Go to confirmation' button on '/file-passed-checks' page")
+      FilePassedCheckPage.onPageContinueById()
+
+      And("the Organisation user click 'Upload another file' link on '/file-confirmation' page")
+      FileConfirmationPage.clickOnLinkWithIdPage(FileConfirmationPage.uploadAnotherFileLink)
+
+      And("the Organisation user is on '/upload-file' page")
+      UploadFilePage.onPage()
+
+    }
+
+    Scenario("3 - Organisation user uploads Invalid file", SoloTests) { // TODO: Update tag once scenarios are confirmed
       Given("the Organisation user logs in with a valid CARF ID")
       AuthLoginPage.loginAsOrgAdminWithoutCtUtr("RG1111")
 

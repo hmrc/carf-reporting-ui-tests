@@ -24,7 +24,7 @@ object SendYourFilePage extends BasePage {
 
   val loadingSpinner: By = By.cssSelector("#processing svg circle")
 
-  def loadingSpinnerDisappear(): Unit =
-    waitForElementDisappear(45, loadingSpinner)
+  def loadingSpinnerDisappear(timeoutSeconds: Long): Unit =
+    waitForElementDisappear(timeoutSeconds, loadingSpinner)
 
 }

@@ -16,21 +16,31 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import org.openqa.selenium.By
+import org.openqa.selenium.support.ui.FluentWait
+import org.openqa.selenium.{By, WebDriver}
 import uk.gov.hmrc.selenium.component.PageObject
+import uk.gov.hmrc.selenium.webdriver.Driver
+
+import java.time.Duration
 object StillCheckingYourFilePage extends BasePage with PageObject {
 
   override val pageUrl: String = baseUrl + "/still-checking-your-file"
 
   val refreshForUpdatesButton: By = By.id("refresh")
 
-  def onPageRefreshForUpdatesById(): Unit = {
+  def refreshUntilRedirected(timeoutSeconds: Long): Unit = {
     onPage()
-    click(refreshForUpdatesButton)
-  }
 
-  def navigateToStillCheckingYourFilePage(): Unit = { // TODO: Remove this after CARF-621
-    navigateTo(pageUrl)
-    onPage()
+    new FluentWait[WebDriver](Driver.instance)
+      .withTimeout(Duration.ofSeconds(timeoutSeconds))
+      .pollingEvery(Duration.ofSeconds(5))
+      .until { (driver: WebDriver) =>
+        if (driver.getCurrentUrl != pageUrl) {
+          java.lang.Boolean.TRUE
+        } else {
+          click(refreshForUpdatesButton)
+          java.lang.Boolean.FALSE
+        }
+      }
   }
 }
