@@ -51,11 +51,19 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
   def onPage(timeoutSeconds: Long = 3): Unit =
     fluentWait(timeoutSeconds).until(ExpectedConditions.urlToBe(pageUrl))
 
+  def onPageWithId(timeoutSeconds: Long = 3): Unit =
+    fluentWait(timeoutSeconds).until(ExpectedConditions.urlContains(pageUrl))
+
   def waitForElementDisappear(timeoutSeconds: Long = 20, locator: By): Unit =
     fluentWait(timeoutSeconds).until(ExpectedConditions.invisibilityOfElementLocated(locator))
 
   def clickOnLink(link: By): Unit = {
     onPage()
+    click(link)
+  }
+
+  def clickOnLinkWithIdPage(link: By): Unit = {
+    onPageWithId()
     click(link)
   }
 
