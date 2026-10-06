@@ -16,11 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import org.openqa.selenium.By
-
 object FilePassedCheckPage extends BasePage {
 
   override val pageUrl: String = baseUrl + "/file-passed-checks"
 
-  val goToConfirmationButton: By = By.id("continue")
 }

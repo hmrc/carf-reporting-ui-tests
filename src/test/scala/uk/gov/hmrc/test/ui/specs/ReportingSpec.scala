@@ -67,7 +67,7 @@ class ReportingSpec extends BaseSpec {
       SendYourFilePage.loadingSpinnerDisappear(150)
 
       And("the Organisation user clicks '/Refresh for updates' button on '/still-checking-your-file' page")
-      StillCheckingYourFilePage.refreshUntilRedirected(150)
+      StillCheckingYourFilePage.refreshUntilRedirected(StillCheckingYourFilePage.refreshForUpdatesButton, 150)
 
       And("the Organisation user click 'Go to confirmation' button on '/file-passed-checks' page")
       FilePassedCheckPage.onPageContinueById()
