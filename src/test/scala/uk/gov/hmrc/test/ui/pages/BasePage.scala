@@ -35,12 +35,13 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
 
   def navigateTo(url: String): Unit = driver.navigate().to(url)
 
-  val continueButtonId: By = By.id("continue")
-  val submitButtonId: By   = By.id("submit")
-  val yesRadioId: By       = By.id("value")
-  val noRadioId: By        = By.id("value-no")
-  val inputId: By          = By.id("value")
-  val fileUploadId: By     = By.id("file-upload-input")
+  val continueButtonId: By    = By.id("continue")
+  val submitButtonId: By      = By.id("submit")
+  val yesRadioId: By          = By.id("value")
+  val noRadioId: By           = By.id("value-no")
+  val inputId: By             = By.id("value")
+  val fileUploadId: By        = By.id("file-upload-input")
+  val uploadAnotherFileId: By = By.id("upload-link")
 
   private def fluentWait(timeoutSeconds: Long, pollingMillis: Long = 200): Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(timeoutSeconds))
@@ -51,7 +52,7 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
   def onPage(timeoutSeconds: Long = 3): Unit =
     fluentWait(timeoutSeconds).until(ExpectedConditions.urlToBe(pageUrl))
 
-  def onPageWithId(timeoutSeconds: Long = 3): Unit =
+  def onPageWithUploadId(timeoutSeconds: Long = 3): Unit =
     fluentWait(timeoutSeconds).until(ExpectedConditions.urlContains(pageUrl))
 
   def waitForElementDisappear(timeoutSeconds: Long = 20, locator: By): Unit =
@@ -62,8 +63,11 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
     click(link)
   }
 
-  def clickOnLinkWithIdPage(link: By): Unit = {
-    onPageWithId()
+  def clickUploadAnotherFileLink(): Unit =
+    clickOnLinkWithUploadIdPage(uploadAnotherFileId)
+
+  def clickOnLinkWithUploadIdPage(link: By): Unit = {
+    onPageWithUploadId()
     click(link)
   }
 

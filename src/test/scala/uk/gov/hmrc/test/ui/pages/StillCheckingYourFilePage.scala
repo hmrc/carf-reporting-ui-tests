@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.By
+
 object StillCheckingYourFilePage extends BasePage {
 
   override val pageUrl: String = baseUrl + "/still-checking-your-file"

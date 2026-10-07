@@ -41,7 +41,7 @@ class ReportingSpec extends BaseSpec {
       SendYourFilePage.loadingSpinnerDisappear(45)
 
       And("the Organisation user click 'Upload another file' link on '/file-confirmation' page")
-      FileConfirmationPage.clickOnLinkWithIdPage(FileConfirmationPage.uploadAnotherFileLink)
+      FileConfirmationPage.clickUploadAnotherFileLink()
 
       And("the Organisation user is on '/upload-file' page")
       UploadFilePage.onPage()
@@ -73,26 +73,68 @@ class ReportingSpec extends BaseSpec {
       FilePassedCheckPage.onPageContinueById()
 
       And("the Organisation user click 'Upload another file' link on '/file-confirmation' page")
-      FileConfirmationPage.clickOnLinkWithIdPage(FileConfirmationPage.uploadAnotherFileLink)
+      FileConfirmationPage.clickUploadAnotherFileLink()
 
       And("the Organisation user is on '/upload-file' page")
       UploadFilePage.onPage()
-
     }
 
-    Scenario("3 - Organisation user uploads Invalid file", SoloTests) { // TODO: Update tag once scenarios are confirmed
+    Scenario("3 - Organisation user uploads Invalid file", ReportingTests) {
       Given("the Organisation user logs in with a valid CARF ID")
-      AuthLoginPage.loginAsOrgAdminWithoutCtUtr("RG1111")
+      AuthLoginPage.loginAsOrgAdminWithoutCtUtr("RG1131")
 
       And("the Organisation user clicks on 'Upload an XML file' link on '/manage-cryptoasset-reports' page")
       ServiceHomePage.clickOnLink(ServiceHomePage.uploadXmlFileLink)
 
-      // TODO: Change navigation when redirection from service home page is ready
-      And("the Organisation user navigates to '/invalid-xml' page")
-      InvalidXmlPage.navigateInvalidXmlPage()
+      And("the Organisation user uploads malformed file on '/upload-file' page")
+      UploadFilePage.fileUpload("malformed-xml.xml")
 
       And("the Organisation user clicks 'Upload a different file' link on '/invalid-xml' page")
-      InvalidXmlPage.clickOnLink(InvalidXmlPage.uploadADifferentFileLink)
+      InvalidXmlPage.clickUploadAnotherFileLink()
+
+      And("the Organisation user uploads data error file on '/upload-file' page")
+      UploadFilePage.fileUpload("data-error-carf.xml")
+
+      And("the Organisation user clicks 'Upload the updated file' link on '/data-errors' page")
+      DataErrorsPage.clickUploadAnotherFileLink()
+
+      And("the Organisation user uploads rcasp not matching file on '/upload-file' page")
+      UploadFilePage.fileUpload("no-rcasp-id.xml")
+
+      And("the Organisation user clicks 'Upload the updated file' link on '/rcasp-not-matching' page")
+      RcaspNotMatchingPage.clickUploadAnotherFileLink()
+
+      And("the Organisation user uploads virus file on '/upload-file' page")
+      UploadFilePage.fileUpload("virus-carf.xml")
+
+      And("the Organisation user clicks 'Continue' on '/check-your-file-details' page")
+      CheckYourFileDetailsPage.onPageContinueById()
+
+      And("the Organisation user click 'Confirm and send' on '/send-your-file' page")
+      SendYourFilePage.onPageSubmitById()
+      SendYourFilePage.loadingSpinnerDisappear(45)
+
+      And("the Organisation user clicks 'Upload the updated file' link on '/virus-found' page")
+      VirusFoundPage.clickUploadAnotherFileLink()
+
+      And("the Organisation user uploads rejected slow file on '/upload-file' page")
+      UploadFilePage.fileUpload("rejected-slow-carf.xml")
+
+      And("the Organisation user clicks 'Continue' on '/check-your-file-details' page")
+      CheckYourFileDetailsPage.onPageContinueById()
+
+      And("the Organisation user click 'Confirm and send' on '/send-your-file' page")
+      SendYourFilePage.onPageSubmitById()
+      SendYourFilePage.loadingSpinnerDisappear(45)
+
+      And("the Organisation user clicks '/Refresh for updates' button on '/still-checking-your-file' page")
+      StillCheckingYourFilePage.refreshUntilRedirected(StillCheckingYourFilePage.refreshForUpdatesButton, 150)
+
+      And("the Organisation user click 'Check errors' button on '/file-failed-checks' page")
+      FileFailedChecksPage.onPageContinueById()
+
+      And("the Organisation user clicks 'Upload the updated file' link on '/rules-errors' page")
+      RuleErrorsPage.clickUploadAnotherFileLink()
 
       Then("the Organisation user is redirected to '/upload-file' page")
       UploadFilePage.onPage()
