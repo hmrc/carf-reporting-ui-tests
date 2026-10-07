@@ -63,9 +63,6 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
     click(link)
   }
 
-  def clickUploadAnotherFileLink(): Unit =
-    clickOnLinkWithUploadIdPage(uploadAnotherFileId)
-
   def clickOnLinkWithUploadIdPage(link: By): Unit = {
     onPageWithUploadId()
     click(link)

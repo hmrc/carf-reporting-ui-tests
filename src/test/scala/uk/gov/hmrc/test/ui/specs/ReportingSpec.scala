@@ -41,7 +41,7 @@ class ReportingSpec extends BaseSpec {
       SendYourFilePage.loadingSpinnerDisappear(45)
 
       And("the Organisation user click 'Upload another file' link on '/file-confirmation' page")
-      FileConfirmationPage.clickUploadAnotherFileLink()
+      FileConfirmationPage.clickOnLinkWithUploadIdPage(FileConfirmationPage.uploadAnotherFileId)
 
       And("the Organisation user is on '/upload-file' page")
       UploadFilePage.onPage()
@@ -73,7 +73,7 @@ class ReportingSpec extends BaseSpec {
       FilePassedCheckPage.onPageContinueById()
 
       And("the Organisation user click 'Upload another file' link on '/file-confirmation' page")
-      FileConfirmationPage.clickUploadAnotherFileLink()
+      FileConfirmationPage.clickOnLinkWithUploadIdPage(FileConfirmationPage.uploadAnotherFileId)
 
       And("the Organisation user is on '/upload-file' page")
       UploadFilePage.onPage()
@@ -90,19 +90,19 @@ class ReportingSpec extends BaseSpec {
       UploadFilePage.fileUpload("malformed-xml.xml")
 
       And("the Organisation user clicks 'Upload a different file' link on '/invalid-xml' page")
-      InvalidXmlPage.clickUploadAnotherFileLink()
+      InvalidXmlPage.clickOnLink(InvalidXmlPage.uploadAnotherFileId)
 
       And("the Organisation user uploads data error file on '/upload-file' page")
       UploadFilePage.fileUpload("data-error-carf.xml")
 
       And("the Organisation user clicks 'Upload the updated file' link on '/data-errors' page")
-      DataErrorsPage.clickUploadAnotherFileLink()
+      DataErrorsPage.clickOnLink(DataErrorsPage.uploadAnotherFileId)
 
       And("the Organisation user uploads rcasp not matching file on '/upload-file' page")
       UploadFilePage.fileUpload("no-rcasp-id.xml")
 
       And("the Organisation user clicks 'Upload the updated file' link on '/rcasp-not-matching' page")
-      RcaspNotMatchingPage.clickUploadAnotherFileLink()
+      RcaspNotMatchingPage.clickOnLink(RcaspNotMatchingPage.uploadAnotherFileId)
 
       And("the Organisation user uploads virus file on '/upload-file' page")
       UploadFilePage.fileUpload("virus-carf.xml")
@@ -112,10 +112,10 @@ class ReportingSpec extends BaseSpec {
 
       And("the Organisation user click 'Confirm and send' on '/send-your-file' page")
       SendYourFilePage.onPageSubmitById()
-      SendYourFilePage.loadingSpinnerDisappear(45)
+      SendYourFilePage.loadingSpinnerDisappear(60)
 
       And("the Organisation user clicks 'Upload the updated file' link on '/virus-found' page")
-      VirusFoundPage.clickUploadAnotherFileLink()
+      VirusFoundPage.clickOnLinkWithUploadIdPage(VirusFoundPage.uploadAnotherFileId)
 
       And("the Organisation user uploads rejected slow file on '/upload-file' page")
       UploadFilePage.fileUpload("rejected-slow-carf.xml")
@@ -134,7 +134,7 @@ class ReportingSpec extends BaseSpec {
       FileFailedChecksPage.onPageContinueById()
 
       And("the Organisation user clicks 'Upload the updated file' link on '/rules-errors' page")
-      RuleErrorsPage.clickUploadAnotherFileLink()
+      RuleErrorsPage.clickOnLinkWithUploadIdPage(RuleErrorsPage.uploadAnotherFileId)
 
       Then("the Organisation user is redirected to '/upload-file' page")
       UploadFilePage.onPage()
