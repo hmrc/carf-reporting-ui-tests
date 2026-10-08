@@ -16,16 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import org.openqa.selenium.By
-
 object InvalidXmlPage extends BasePage {
 
   override val pageUrl: String = baseUrl + "/problem/invalid-xml"
 
-  val uploadADifferentFileLink: By = By.cssSelector("a[href*='/send-a-cryptoasset-report/upload-file']")
-
-  def navigateInvalidXmlPage(): Unit = { // TODO: Remove this method once the previous pages are implemented Probably CARF-596
-    navigateTo(pageUrl)
-    onPage()
-  }
 }

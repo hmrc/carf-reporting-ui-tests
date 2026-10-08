@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-object CheckYourFileDetailsPage extends BasePage {
+object FilePassedCheckPage extends BasePage {
 
-  override val pageUrl: String = baseUrl + "/check-your-file-details"
+  override val pageUrl: String = baseUrl + "/file-passed-checks"
 
 }

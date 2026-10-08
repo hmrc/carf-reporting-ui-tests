@@ -35,23 +35,24 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
 
   def navigateTo(url: String): Unit = driver.navigate().to(url)
 
-  val continueButtonId: By = By.id("continue")
-  val submitButtonId: By   = By.id("submit")
-  val yesRadioId: By       = By.id("value")
-  val noRadioId: By        = By.id("value-no")
-  val inputId: By          = By.id("value")
-  val fileUploadId: By     = By.id("file-upload-input")
+  val continueButtonId: By    = By.id("continue")
+  val submitButtonId: By      = By.id("submit")
+  val yesRadioId: By          = By.id("value")
+  val noRadioId: By           = By.id("value-no")
+  val inputId: By             = By.id("value")
+  val fileUploadId: By        = By.id("file-upload-input")
+  val uploadAnotherFileId: By = By.id("upload-link")
 
-  private def fluentWait(timeoutSeconds: Long): Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
+  private def fluentWait(timeoutSeconds: Long, pollingMillis: Long = 200): Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(timeoutSeconds))
-    .pollingEvery(Duration.ofMillis(200))
+    .pollingEvery(Duration.ofMillis(pollingMillis))
     .ignoring(classOf[org.openqa.selenium.StaleElementReferenceException])
     .ignoring(classOf[org.openqa.selenium.NoSuchElementException])
 
   def onPage(timeoutSeconds: Long = 3): Unit =
     fluentWait(timeoutSeconds).until(ExpectedConditions.urlToBe(pageUrl))
 
-  def onPageWithId(timeoutSeconds: Long = 3): Unit =
+  def onPageWithUploadId(timeoutSeconds: Long = 3): Unit =
     fluentWait(timeoutSeconds).until(ExpectedConditions.urlContains(pageUrl))
 
   def waitForElementDisappear(timeoutSeconds: Long = 20, locator: By): Unit =
@@ -62,8 +63,8 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
     click(link)
   }
 
-  def clickOnLinkWithIdPage(link: By): Unit = {
-    onPageWithId()
+  def clickOnLinkWithUploadIdPage(link: By): Unit = {
+    onPageWithUploadId()
     click(link)
   }
 
@@ -115,6 +116,20 @@ trait BasePage extends BrowserDriver with Matchers with IdGenerators with PageOb
   def onPageContinueById(): Unit = {
     onPage()
     click(continueButtonId)
+  }
+
+  def refreshUntilRedirected(locator: By, timeoutSeconds: Long): Unit = {
+    onPage()
+
+    fluentWait(timeoutSeconds, pollingMillis = 5000)
+      .until { (driver: WebDriver) =>
+        if (driver.getCurrentUrl != pageUrl) {
+          true
+        } else {
+          click(locator)
+          false
+        }
+      }
   }
 
   def uploadAnyFile(file: String): Unit =
