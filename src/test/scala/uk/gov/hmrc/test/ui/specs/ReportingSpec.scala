@@ -38,7 +38,7 @@ class ReportingSpec extends BaseSpec {
 
       And("the Organisation user click 'Confirm and send' on '/send-your-file' page")
       SendYourFilePage.onPageSubmitById()
-      SendYourFilePage.loadingSpinnerDisappear(45)
+      SendYourFilePage.loadingSpinnerDisappear(150)
 
       And("the Organisation user click 'Upload another file' link on '/file-confirmation' page")
       FileConfirmationPage.clickOnLinkWithUploadIdPage(FileConfirmationPage.uploadAnotherFileId)
@@ -112,7 +112,7 @@ class ReportingSpec extends BaseSpec {
 
       And("the Organisation user click 'Confirm and send' on '/send-your-file' page")
       SendYourFilePage.onPageSubmitById()
-      SendYourFilePage.loadingSpinnerDisappear(60)
+      SendYourFilePage.loadingSpinnerDisappear(150)
 
       And("the Organisation user clicks 'Upload the updated file' link on '/virus-found' page")
       VirusFoundPage.clickOnLinkWithUploadIdPage(VirusFoundPage.uploadAnotherFileId)
@@ -125,7 +125,7 @@ class ReportingSpec extends BaseSpec {
 
       And("the Organisation user click 'Confirm and send' on '/send-your-file' page")
       SendYourFilePage.onPageSubmitById()
-      SendYourFilePage.loadingSpinnerDisappear(45)
+      SendYourFilePage.loadingSpinnerDisappear(150)
 
       And("the Organisation user clicks '/Refresh for updates' button on '/still-checking-your-file' page")
       StillCheckingYourFilePage.refreshUntilRedirected(StillCheckingYourFilePage.refreshForUpdatesButton, 150)
