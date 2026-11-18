@@ -42,10 +42,21 @@ class ReportingSpec extends BaseSpec {
 
       And("the Organisation user click 'Upload another file' link on '/file-confirmation' page")
       FileConfirmationPage.clickOnLinkWithUploadIdPage(FileConfirmationPage.uploadAnotherFileId)
+//      TODO: Uncomment the code once /details-of-files-you-have-sent is enabled
+//      And("the Organisation user click 'Back to manage your cryptoasset reports' link on '/file-confirmation' page")
+//      FileConfirmationPage.clickOnLinkWithUploadIdPage(FileConfirmationPage.backToManageYourCryptoassetReportsLink)
+//
+//      And("the Organisation user clicks on 'Details of files you have sent' link on '/manage-cryptoasset-reports' page")
+//      ServiceHomePage.clickOnLink(ServiceHomePage.detailsOfFileSentLink)
+//
+//      And("the Organisation user clicks on 'Go to confirm' link on '/details-of-files-you-have-sent' page")
+//      DetailsOfFilesYouHaveSentPage.clickOnLink(DetailsOfFilesYouHaveSentPage.goToConfirmLink)
+//
+//      And("the Organisation user click 'Upload another file' link on '/file-confirmation' page")
+//      FileConfirmationPage.clickOnLinkWithUploadIdPage(FileConfirmationPage.uploadAnotherFileId)
 
-      And("the Organisation user is on '/upload-file' page")
+      Then("the Organisation user is on '/upload-file' page")
       UploadFilePage.onPage()
-
     }
 
     Scenario("2 - Organisation user uploads Valid file - Slow journey", ReportingTests) {
@@ -75,7 +86,7 @@ class ReportingSpec extends BaseSpec {
       And("the Organisation user click 'Upload another file' link on '/file-confirmation' page")
       FileConfirmationPage.clickOnLinkWithUploadIdPage(FileConfirmationPage.uploadAnotherFileId)
 
-      And("the Organisation user is on '/upload-file' page")
+      Then("the Organisation user is on '/upload-file' page")
       UploadFilePage.onPage()
     }
 
@@ -136,8 +147,22 @@ class ReportingSpec extends BaseSpec {
       And("the Organisation user clicks 'Upload the updated file' link on '/rules-errors' page")
       RuleErrorsPage.clickOnLinkWithUploadIdPage(RuleErrorsPage.uploadAnotherFileId)
 
+      And("the Organisation user uploads 14-valid-carf-schema-error on '/upload-file' page")
+      UploadFilePage.fileUpload("14-valid-carf-schema-error.xml")
+
+      And("the Organisation user clicks 'Continue' on '/check-your-file-details' page")
+      CheckYourFileDetailsPage.onPageContinueById()
+
+      And("the Organisation user click 'Confirm and send' on '/send-your-file' page")
+      SendYourFilePage.onPageSubmitById()
+      SendYourFilePage.loadingSpinnerDisappear(150)
+
+      And("the Organisation user click service navigation link on '/file-not-accepted' page")
+      FileNotAcceptedPage.clickOnLinkWithUploadIdPage(FileNotAcceptedPage.serviceNavigationLink)
+
       Then("the Organisation user is redirected to '/upload-file' page")
       UploadFilePage.onPage()
+
     }
   }
 }

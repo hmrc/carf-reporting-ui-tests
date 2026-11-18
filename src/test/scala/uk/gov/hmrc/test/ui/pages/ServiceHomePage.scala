@@ -22,6 +22,6 @@ import uk.gov.hmrc.test.ui.conf.TestConfiguration
 object ServiceHomePage extends BasePage {
   override val pageUrl: String = TestConfiguration.url("carf-management-frontend") + "/manage-cryptoasset-reports"
 
-  val uploadXmlFileLink: By = By.cssSelector("a[href*='/send-a-cryptoasset-report/upload-file']")
-
+  val uploadXmlFileLink: By     = By.cssSelector("a[href*='/send-a-cryptoasset-report/upload-file']")
+  val detailsOfFileSentLink: By = By.cssSelector("a[href*='/details-of-files-you-have-sent']")
 }
